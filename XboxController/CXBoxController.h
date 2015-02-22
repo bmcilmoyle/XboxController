@@ -29,13 +29,11 @@
 #define DPADUP 14
 #define DPADDOWN 15
 
-
 // The darn includes and dlls are different between the various versions of Windows... Grrrr.
 // See: https://katyscode.wordpress.com/2013/08/30/xinput-tutorial-part-1-adding-gamepad-support-to-your-windows-game/
 #ifndef _DEBUG
 #pragma comment(lib, "XINPUT9_1_0.LIB")
 #endif
-
 
 
 class CXBoxController
@@ -111,22 +109,8 @@ public:
 	float getLeftTrigger(void);
 	float getRightTrigger(void);
 
-	//bool bIsAButtonDown(void);	// Button 1
-	//bool bIsBButtonDown(void);	// Button 2
-	//bool bIsXButtonDown(void);	// Button 3
-	//bool bIsYButtonDown(void);	// Button 4
-	//bool bIsLeftButtonDown(void);	// Button 5
-	//bool bIsRightButtonDown(void);	// Button 6
-	//bool bIsBackButtonDown(void);	// Button 7
-	//bool bIsStartButtonDown(void);	// Button 8
-	//bool bIsLeftJoystickButtonDown(void);	// Button 9
-	//bool bIsRightJoystickButtonDown(void);	// Button 10
 	bool bIsLeftTriggerDown(void);	// Depends on threshold
 	bool bIsRightTriggerDown(void);	// Depends on threshold
-	//bool bIsGamePadLeft(void);
-	//bool bIsGamePadRight(void);
-	//bool bIsGamePadUp(void);
-	//bool bIsGamePadDown(void);
 
 private:
 	CXBoxController() {};	// Can't call
@@ -161,10 +145,10 @@ private:
 	std::list<CVibStep> m_VibSequenceRight;
 	float m_elapsedSeconds;
 
-	std::map<int,bool> m_buttonDown;
-	std::map<int,bool> m_buttonPressed;
-	std::map<int,bool> m_buttonUp;
-	std::map<int,bool> m_buttonPressedLastUpdate;
+	std::map<int,int> m_buttonDown;
+	std::map<int,int> m_buttonPressed;
+	std::map<int,int> m_buttonUp;
+	std::map<int,int> m_buttonPressedLastUpdate;
 
 #ifdef _DEBUG
 	// These are to get the process addresses so we don't have to link to the libraries any more

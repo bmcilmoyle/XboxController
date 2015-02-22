@@ -39,7 +39,7 @@ int main ()
 		p_GameController_0->Update(deltaTime);
 
 
-		//Test controller input
+		//Test down functions
 		if (p_GameController_0->buttonDown(ABUTTON))
 			std::cout << " A button pressed" << std::endl;
 
@@ -88,6 +88,66 @@ int main ()
 		if (p_GameController_0->buttonDown(DPADDOWN))
 			std::cout << " D PAD DOWN pressed" << std::endl;
 
+		//Test up functions
+			if (p_GameController_0->buttonUp(ABUTTON))
+			std::cout << " A button released" << std::endl;
 
+		if (p_GameController_0->buttonUp(BBUTTON))
+			std::cout << " B button released" << std::endl;
+
+		if (p_GameController_0->buttonUp(XBUTTON))
+			std::cout << " X button released" << std::endl;
+
+		if (p_GameController_0->buttonUp(YBUTTON))
+			std::cout << " Y button released" << std::endl;
+
+		if (p_GameController_0->buttonUp(STARTBUTTON))
+			std::cout << " START button released" << std::endl;
+
+		if (p_GameController_0->buttonUp(BACKBUTTON))
+			std::cout << " BACK button released" << std::endl;
+
+		if (p_GameController_0->buttonUp(LEFTBUMPER))
+			std::cout << " LEFT BUMPER released" << std::endl;
+
+		if (p_GameController_0->buttonUp(LEFTTRIGGER))
+			std::cout << " LEFT TRIGGER released" << std::endl;
+
+		if (p_GameController_0->buttonUp(LEFTSTICKCLICK))
+			std::cout << " LEFT STICK released" << std::endl;
+
+		if (p_GameController_0->buttonUp(RIGHTBUMPER))
+			std::cout << " RIGHT BUMPER released" << std::endl;
+
+		if (p_GameController_0->buttonUp(RIGHTTRIGGER))
+			std::cout << " RIGHT TRIGGER released" << std::endl;
+
+		if (p_GameController_0->buttonUp(RIGHTSTICKCLICK))
+			std::cout << " RIGHT STICK released" << std::endl;
+
+		if (p_GameController_0->buttonUp(DPADLEFT))
+			std::cout << " D PAD LEFT released" << std::endl;
+
+		if (p_GameController_0->buttonUp(DPADRIGHT))
+			std::cout << " D PAD RIGHT released" << std::endl;
+
+		if (p_GameController_0->buttonUp(DPADUP))
+			std::cout << " D PAD UP released" << std::endl;
+
+		if (p_GameController_0->buttonUp(DPADDOWN))
+			std::cout << " D PAD DOWN released" << std::endl;
+
+		//test joysticks
+		if(p_GameController_0->getLeftJoystickXAxis() != 0.0f)
+			std::cout << " LEFT STICK X AXIS VALUE " << p_GameController_0->getLeftJoystickXAxis() << std::endl;
+
+		if(p_GameController_0->getLeftJoystickYAxis() != 0.0f)
+			std::cout << " LEFT STICK Y AXIS VALUE " << p_GameController_0->getLeftJoystickYAxis() << std::endl;
+
+		if(p_GameController_0->getRightJoystickXAxis() != 0.0f)
+			std::cout << " RIGHT STICK X AXIS VALUE " << p_GameController_0->getRightJoystickXAxis() << std::endl;
+
+		if(p_GameController_0->getRightJoystickYAxis() != 0.0f)
+			std::cout << " RIGHT STICK Y AXIS VALUE " << p_GameController_0->getRightJoystickYAxis() << std::endl;
 	}
 }

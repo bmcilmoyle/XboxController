@@ -107,17 +107,17 @@ bool CXBoxController::bCantResolveProcAddresses_SoAllIsLost = false;
 
 bool CXBoxController::buttonDown(int buttonID)
 {
-	return this->m_buttonDown[buttonID];
+	return this->m_buttonDown[buttonID] != 0; // Use != 0 to silence compile warnings
 }
 
 bool CXBoxController::buttonPressed(int buttonID)
 {
-	return this->m_buttonPressed[buttonID];
+	return this->m_buttonPressed[buttonID] != 0; // Use != 0 to silence compile warnings
 }
 
 bool CXBoxController::buttonUp(int buttonID)
 {
-	return this->m_buttonUp[buttonID];
+	return this->m_buttonUp[buttonID] != 0; // Use != 0 to silence compile warnings
 }
 
 CXBoxController::enumDeadZoneCalculation CXBoxController::getDeadZoneCalculation(void)
