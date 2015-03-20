@@ -11,7 +11,6 @@
 #include <string>
 #include <map>
 
-
 #define ABUTTON 0
 #define BBUTTON 1
 #define XBUTTON 2
@@ -145,9 +144,7 @@ private:
 	std::list<CVibStep> m_VibSequenceRight;
 	float m_elapsedSeconds;
 
-	std::map<int,int> m_buttonDown;
 	std::map<int,int> m_buttonPressed;
-	std::map<int,int> m_buttonUp;
 	std::map<int,int> m_buttonPressedLastUpdate;
 
 #ifdef _DEBUG

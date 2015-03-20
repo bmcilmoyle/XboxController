@@ -90,7 +90,7 @@
     <ClCompile Include="CTextureLoaderManager.cpp" />
     <ClCompile Include="CTriangle.cpp" />
     <ClCompile Include="CXBoxController.cpp" />
-    <ClCompile Include="SuperBasic_GLEW_freeGLUT.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>

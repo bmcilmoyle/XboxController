@@ -29,9 +29,7 @@ CXBoxController::~CXBoxController()
 	//Set all the buttons to false to start
 	for (int i =0; 0 < 16; i++)
 	{
-		this->m_buttonDown[i]=false;
 		this->m_buttonPressed[i]=false;
-		this->m_buttonUp[i]=false;
 		this->m_buttonPressedLastUpdate[i] = false;
 	}
 
@@ -107,17 +105,17 @@ bool CXBoxController::bCantResolveProcAddresses_SoAllIsLost = false;
 
 bool CXBoxController::buttonDown(int buttonID)
 {
-	return this->m_buttonDown[buttonID] != 0; // Use != 0 to silence compile warnings
+	return (!this->m_buttonPressedLastUpdate[buttonID]) && (this->m_buttonPressed[buttonID]);
 }
 
 bool CXBoxController::buttonPressed(int buttonID)
 {
-	return this->m_buttonPressed[buttonID] != 0; // Use != 0 to silence compile warnings
+	return this->m_buttonPressed[buttonID] != 0; 
 }
 
 bool CXBoxController::buttonUp(int buttonID)
 {
-	return this->m_buttonUp[buttonID] != 0; // Use != 0 to silence compile warnings
+	return (this->m_buttonPressedLastUpdate[buttonID]) && (!this->m_buttonPressed[buttonID]);
 }
 
 CXBoxController::enumDeadZoneCalculation CXBoxController::getDeadZoneCalculation(void)
@@ -203,42 +201,6 @@ void CXBoxController::updateInputMaps()
 	this->m_buttonPressed[DPADRIGHT] = this->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT;
 	this->m_buttonPressed[DPADUP] = this->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP;
 	this->m_buttonPressed[DPADDOWN] = this->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN;
-
-	//Check if the button was just pushed this update
-	this->m_buttonDown[ABUTTON] = this->m_buttonPressed[ABUTTON] && !m_buttonPressedLastUpdate[ABUTTON];
-	this->m_buttonDown[BBUTTON] = this->m_buttonPressed[BBUTTON] && !m_buttonPressedLastUpdate[BBUTTON];
-	this->m_buttonDown[XBUTTON] = this->m_buttonPressed[XBUTTON] && !m_buttonPressedLastUpdate[XBUTTON];
-	this->m_buttonDown[YBUTTON] = this->m_buttonPressed[YBUTTON] && !m_buttonPressedLastUpdate[YBUTTON];
-	this->m_buttonDown[LEFTBUMPER] = this->m_buttonPressed[LEFTBUMPER] && !m_buttonPressedLastUpdate[LEFTBUMPER];
-	this->m_buttonDown[RIGHTBUMPER] = this->m_buttonPressed[RIGHTBUMPER] && !m_buttonPressedLastUpdate[RIGHTBUMPER];
-	this->m_buttonDown[LEFTTRIGGER] = this->m_buttonPressed[LEFTTRIGGER] && !m_buttonPressedLastUpdate[LEFTTRIGGER];
-	this->m_buttonDown[RIGHTTRIGGER] = this->m_buttonPressed[RIGHTTRIGGER] && !m_buttonPressedLastUpdate[RIGHTTRIGGER];
-	this->m_buttonDown[BACKBUTTON] = this->m_buttonPressed[BACKBUTTON] && !m_buttonPressedLastUpdate[BACKBUTTON];
-	this->m_buttonDown[STARTBUTTON] = this->m_buttonPressed[STARTBUTTON] && !m_buttonPressedLastUpdate[STARTBUTTON];
-	this->m_buttonDown[LEFTSTICKCLICK] = this->m_buttonPressed[LEFTSTICKCLICK] && !m_buttonPressedLastUpdate[LEFTSTICKCLICK];
-	this->m_buttonDown[RIGHTSTICKCLICK] = this->m_buttonPressed[RIGHTSTICKCLICK] && !m_buttonPressedLastUpdate[RIGHTSTICKCLICK];
-	this->m_buttonDown[DPADLEFT] = this->m_buttonPressed[DPADLEFT] && !m_buttonPressedLastUpdate[DPADLEFT];
-	this->m_buttonDown[DPADRIGHT] = this->m_buttonPressed[DPADRIGHT] && !m_buttonPressedLastUpdate[DPADRIGHT];
-	this->m_buttonDown[DPADUP] = this->m_buttonPressed[DPADUP] && !m_buttonPressedLastUpdate[DPADUP];
-	this->m_buttonDown[DPADDOWN] = this->m_buttonPressed[DPADDOWN] && !m_buttonPressedLastUpdate[DPADDOWN];
-
-	//Check if the button was just released this update
-	this->m_buttonUp[ABUTTON] = !this->m_buttonPressed[ABUTTON] && m_buttonPressedLastUpdate[ABUTTON];
-	this->m_buttonUp[BBUTTON] = !this->m_buttonPressed[BBUTTON] && m_buttonPressedLastUpdate[BBUTTON];
-	this->m_buttonUp[XBUTTON] = !this->m_buttonPressed[XBUTTON] && m_buttonPressedLastUpdate[XBUTTON];
-	this->m_buttonUp[YBUTTON] = !this->m_buttonPressed[YBUTTON] && m_buttonPressedLastUpdate[YBUTTON];
-	this->m_buttonUp[LEFTBUMPER] = !this->m_buttonPressed[LEFTBUMPER] && m_buttonPressedLastUpdate[LEFTBUMPER];
-	this->m_buttonUp[RIGHTBUMPER] = !this->m_buttonPressed[RIGHTBUMPER] && m_buttonPressedLastUpdate[RIGHTBUMPER];
-	this->m_buttonUp[LEFTTRIGGER] = !this->m_buttonPressed[LEFTTRIGGER] && m_buttonPressedLastUpdate[LEFTTRIGGER];
-	this->m_buttonUp[RIGHTTRIGGER] = !this->m_buttonPressed[RIGHTTRIGGER] && m_buttonPressedLastUpdate[RIGHTTRIGGER];
-	this->m_buttonUp[BACKBUTTON] = !this->m_buttonPressed[BACKBUTTON] && m_buttonPressedLastUpdate[BACKBUTTON];
-	this->m_buttonUp[STARTBUTTON] = !this->m_buttonPressed[STARTBUTTON] && m_buttonPressedLastUpdate[STARTBUTTON];
-	this->m_buttonUp[LEFTSTICKCLICK] = !this->m_buttonPressed[LEFTSTICKCLICK] && m_buttonPressedLastUpdate[LEFTSTICKCLICK];
-	this->m_buttonUp[RIGHTSTICKCLICK] = !this->m_buttonPressed[RIGHTSTICKCLICK] && m_buttonPressedLastUpdate[RIGHTSTICKCLICK];
-	this->m_buttonUp[DPADLEFT] = !this->m_buttonPressed[DPADLEFT] && m_buttonPressedLastUpdate[DPADLEFT];
-	this->m_buttonUp[DPADRIGHT] = !this->m_buttonPressed[DPADRIGHT] && m_buttonPressedLastUpdate[DPADRIGHT];
-	this->m_buttonUp[DPADUP] = !this->m_buttonPressed[DPADUP] && m_buttonPressedLastUpdate[DPADUP];
-	this->m_buttonUp[DPADDOWN] = !this->m_buttonPressed[DPADDOWN] && m_buttonPressedLastUpdate[DPADDOWN];
 }
 
 // from: http://www.third-helix.com/2013/04/12/doing-thumbstick-dead-zones-right.html

@@ -33,6 +33,7 @@ int main ()
 		//Get the time that has passd since the last call to the timer
 		timer.Stop();
 		float deltaTime = timer.GetElapsedSeconds();
+		std::cout << " Delta time:  " << deltaTime * 100 << std::endl;
 		timer.Start();
 
 		//Update the controller with the delta time
@@ -89,7 +90,7 @@ int main ()
 			std::cout << " D PAD DOWN pressed" << std::endl;
 
 		//Test up functions
-			if (p_GameController_0->buttonUp(ABUTTON))
+		if (p_GameController_0->buttonUp(ABUTTON))
 			std::cout << " A button released" << std::endl;
 
 		if (p_GameController_0->buttonUp(BBUTTON))

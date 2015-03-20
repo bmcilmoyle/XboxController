@@ -58,8 +58,8 @@ const int g_numberOfTriangles = 2;
 
 void CreateSquare(void);
 
-int CurrentWidth = 800;
-int CurrentHeight = 600;
+int CurrentWidth = 1920;
+int CurrentHeight = 1080;
 int WindowHandle = 0;
 
 //Create a high resolution timer to get time between updates.
@@ -123,11 +123,11 @@ int main(int argc, char* argv[])
 	p_GameController_0->setDeadZoneCalculation(p_GameController_0->NO_DEAD_ZONE);
 
 	//Controller will vibrate when program starts to confirm game works
-	if ( !(( p_GameController_0 != 0 ) && ( p_GameController_0->bIsConnected() )) )
-	{
-		std::cout << "Didn't get an ID for the game controller; is there one plugged in?" << std::endl;
-		return 1;
-	}
+	//if ( !(( p_GameController_0 != 0 ) && ( p_GameController_0->bIsConnected() )) )
+	//{
+	//	std::cout << "Didn't get an ID for the game controller; is there one plugged in?" << std::endl;
+	//	return 1;
+	//}
 
 	//Init the window
 	Initialize(argc, argv);
@@ -341,89 +341,46 @@ void IdleFunction(void)
 		::g_models[2].scale = 0.18f;
 
 	//A button
-	if(p_GameController_0->buttonPressed(ABUTTON))
-		::g_models[3].visible = true;
-	else
-		::g_models[3].visible = false;
+	::g_models[3].visible = p_GameController_0->buttonPressed(ABUTTON);
 
 	//B button
-	if(p_GameController_0->buttonPressed(BBUTTON))
-		::g_models[4].visible = true;
-	else
-		::g_models[4].visible = false;
+	::g_models[4].visible = p_GameController_0->buttonPressed(BBUTTON);
 
 	//X button
-	if(p_GameController_0->buttonPressed(XBUTTON))
-		::g_models[5].visible = true;
-	else
-		::g_models[5].visible = false;
+	::g_models[5].visible = p_GameController_0->buttonPressed(XBUTTON);
 
 	//Y button
-	if(p_GameController_0->buttonPressed(YBUTTON))
-		::g_models[6].visible = true;
-	else
-		::g_models[6].visible = false;
+	::g_models[6].visible = p_GameController_0->buttonPressed(YBUTTON);
 
 	//Back button
-	if(p_GameController_0->buttonPressed(BACKBUTTON))
-		::g_models[7].visible = true;
-	else
-		::g_models[7].visible = false;
+	::g_models[7].visible = p_GameController_0->buttonPressed(BACKBUTTON);
 
 	//Start button
-	if(p_GameController_0->buttonPressed(STARTBUTTON))
-		::g_models[8].visible = true;
-	else
-		::g_models[8].visible = false;
+	::g_models[8].visible = p_GameController_0->buttonPressed(STARTBUTTON);
 
 	//Left trigger
-	if(p_GameController_0->buttonPressed(LEFTTRIGGER))
-		::g_models[9].visible = true;
-	else
-		::g_models[9].visible = false;
+	::g_models[9].visible = p_GameController_0->buttonPressed(LEFTTRIGGER);
 
 	//Right trigger
-	if(p_GameController_0->buttonPressed(RIGHTTRIGGER))
-		::g_models[10].visible = true;
-	else
-		::g_models[10].visible = false;
+	::g_models[10].visible = p_GameController_0->buttonPressed(RIGHTTRIGGER);
 
 	//Left Bumper
-	if(p_GameController_0->buttonPressed(LEFTBUMPER))
-		::g_models[15].visible = true;
-	else
-		::g_models[15].visible = false;
+	::g_models[15].visible = p_GameController_0->buttonPressed(LEFTBUMPER);
 
 	//Right Bumper
-	if(p_GameController_0->buttonPressed(RIGHTBUMPER))
-		::g_models[16].visible = true;
-	else
-		::g_models[16].visible = false;
-
+	::g_models[16].visible = p_GameController_0->buttonPressed(RIGHTBUMPER);
 
 	//Dpad Left
-	if(p_GameController_0->buttonPressed(DPADLEFT))
-		::g_models[11].visible = true;
-	else
-		::g_models[11].visible = false;
+	::g_models[11].visible = p_GameController_0->buttonPressed(DPADLEFT);
 
 	//Dpad Right
-	if(p_GameController_0->buttonPressed(DPADRIGHT))
-		::g_models[12].visible = true;
-	else
-		::g_models[12].visible = false;
+	::g_models[12].visible = p_GameController_0->buttonPressed(DPADRIGHT);
 
 	//Dpad Up
-	if(p_GameController_0->buttonPressed(DPADUP))
-		::g_models[13].visible = true;
-	else
-		::g_models[13].visible = false;
+	::g_models[13].visible = p_GameController_0->buttonPressed(DPADUP);
 
 	//Dpad Down
-	if(p_GameController_0->buttonPressed(DPADDOWN))
-		::g_models[14].visible = true;
-	else
-		::g_models[14].visible = false;
+	::g_models[14].visible = p_GameController_0->buttonPressed(DPADDOWN);
 
 	return;
 }
@@ -496,6 +453,9 @@ bool InitWindow(int argc, char* argv[])
 		exit(EXIT_FAILURE);
 	}
 
+	//Uncomment this if you want to run in full screen
+	//glutFullScreen(); 
+
 	// Tells GLUT what functions to call... ("callback" functions)
 	glutReshapeFunc(ResizeFunction);
 	glutDisplayFunc(RenderFunction);
@@ -547,6 +507,7 @@ void RenderFunction(void)
 
 	//Draw the models to the screen
 	Draw();
+
 
 	glutSwapBuffers();
 
@@ -693,6 +654,9 @@ void DeleteShaders()
 
 void Draw(void)
 {
+	
+	
+
 	// *** START of DRAW THE OBJECT FROM THE BUFFER ****
 	glPolygonMode( GL_FRONT_AND_BACK ,  GL_FILL );
 
